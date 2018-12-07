@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from course.forms import StudentForm
 from course.models import Student
 
@@ -22,7 +22,23 @@ class StudentCreate(CreateView):
 class StudentEdit(UpdateView):
     model = Student
     form_class = StudentForm
-    template_name = 'add_student.html'
+    template_name = 'edit_student.html'
+
+    def get_success_url(self):
+        return reverse('course:list_students')
+
+
+class StudentDelete(DeleteView):
+    model = Student
+    form_class = StudentForm
+    template_name = 'delete_student.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(StudentDelete, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        student = Student.objects.get(id=int(pk))
+        context_data.update({'student': student})
+        return context_data
 
     def get_success_url(self):
         return reverse('course:list_students')

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block main %}
 
@@ -14,6 +15,8 @@
         </th>
         <th>
         </th>
+        <th>
+        </th>
       </thead>
       <tbody>
         {% for student in students %}
@@ -21,6 +24,7 @@
           <td>{{ student.first_name }}</td>
           <td>{{ student.last_name }}</td>
           <td><a href="{% url 'course:edit_student' student.id %}" class="btn btn-info">Edit</a></td>
+          <td><a href="{% url 'course:delete_student' student.id %}" class="btn btn-danger">Delete</a></td>
         </tr>
         {% endfor %}
       </tbody>

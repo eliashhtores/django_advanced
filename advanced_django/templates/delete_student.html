@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+  <div class="container">
+
+    <form class="form-horizontal" method="POST">
+      {% csrf_token %}
+
+      <p class="align-content-lg-center text-danger">Are you sure you want to delete student {{ student }}?</p>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <a href="{% url 'course:list_students' %}"><img src="{% static 'back.png' %}" width="40" height="40"> <input type="submit" name="submit" value="Delete" class="btn btn-danger pull-right"></a>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+{% endblock %}
