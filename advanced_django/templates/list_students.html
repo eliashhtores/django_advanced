@@ -4,7 +4,8 @@
 {% block main %}
 
   <div class="container">
-    <h1 class="text-center">Student List</h1>
+    <h2 class="text-center text-uppercase text-secondary mb-0">Student List</h2>
+    <hr class="star-dark mb-5">
     <table class="table">
       <thead>
         <th>
@@ -13,26 +14,32 @@
         <th>
           Last
         </th>
+        {% if perms.is_teacher %}
         <th>
         </th>
         <th>
         </th>
+        {% endif %}
       </thead>
       <tbody>
         {% for student in students %}
         <tr>
           <td>{{ student.first_name }}</td>
           <td>{{ student.last_name }}</td>
-          <td><a href="{% url 'course:edit_student' student.id %}" class="btn btn-info">Edit</a></td>
-          <td><a href="{% url 'course:delete_student' student.id %}" class="btn btn-danger">Delete</a></td>
+          {% if perms.is_teacher %}
+            <td><a href="{% url 'course:edit_student' student.id %}" class="btn btn-info">Edit</a></td>
+            <td><a href="{% url 'course:delete_student' student.id %}" class="btn btn-danger">Delete</a></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 
-  <div class="container">
-    <a class="btn btn-primary" href="{% url 'course:create_student' %}">New student</a>
-  </div>
+  {% if perms.is_teacher %}
+    <div class="container">
+      <a class="btn btn-primary" href="{% url 'course:create_student' %}">New student</a>
+    </div>
+  {% endif %}
 
 {% endblock %}

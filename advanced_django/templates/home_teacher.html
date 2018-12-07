@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+<div class="row pt-1 pl-5">
+  <p><b>Teacher:</b> {{ request.user }}</p>
+</div>
+
+<div class="row pt-1 pl-5">
+  <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+</div>
+
+<div class="row pl-5">
+  <a class="btn btn-primary" href="/logout">Logout</a>
+</div>
+
+<br>
+
+<div id="content_div" class="row pl-5 col-md-9">
+  <a id="seach-subjects" class="btn btn-primary" href="#">Search</a>
+  <div class="col-md-4">
+    <input id="student-name" type="text" class="form-control">
+  </div>
+</div>
+
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Credits</th>
+  </thead>
+  <tbody id="subjects">
+
+  </tbody>
+</table>
+
+{% endblock %}
+
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#content-div').on('click', '#search-subjects', function () {
+                var name = $('#student-name').val();
+
+                $.get('{% url "course:list_user_subjects" %}', {name: name}, function (data) {
+                    console.log(name)
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr><td>" + data[i].fields.name + "</td><td>" + data[i].fields.number_credits + "</td><tr>";
+                    }
+                    $('#subjects').html(html);
+                });
+
+            });
+
+        });
+    </script>
+
+{% endblock %}

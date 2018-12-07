@@ -43,10 +43,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'course:list_students' %}">List All Students</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
@@ -63,7 +63,6 @@
         {% endblock %}
         <img class="img-fluid mb-5 d-block mx-auto" src="{% static 'img/profile.png' %}" width="10" height="10">
         <h1 class="text-uppercase mb-0">Start Bootstrap</h1>
-        <hr class="star-light">
         <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
       </div>
     </header>
@@ -77,7 +76,6 @@
     <section id="contact">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">Contact Me</h2>
-        <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->

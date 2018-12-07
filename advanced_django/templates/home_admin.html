@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+<div class="row pt-1 pl-5">
+  <p><b>Admin:</b> {{ request.user }}</p>
+</div>
+
+<div class="row pt-1 pl-5">
+  <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+</div>
+
+<div class="row pl-5">
+  <a class="btn btn-primary" href="/logout">Logout</a>
+</div>
+
+{% endblock %}

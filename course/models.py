@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext
 
 
 class Subject(models.Model):
@@ -16,3 +17,9 @@ class Student(models.Model):
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+
+    class Meta:
+        permissions = (
+            ('is_teacher', ugettext('Is Teacher')),
+            ('is_student', ugettext('Is Student')), 
+        )

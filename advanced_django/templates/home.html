@@ -3,4 +3,8 @@
 
 {% block main %}
 
+  <p>User: {{ request.user }}</p>
+  <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+  <a href="/logout">Logout</a>
+
 {% endblock %}
