@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+  <div class="container">
+    <h1 class="text-center">Student List</h1>
+    <table class="table">
+      <thead>
+        <th>
+          Name
+        </th>
+        <th>
+          Last
+        </th>
+        <th>
+        </th>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.last_name }}</td>
+          <td><a href="{% url 'course:edit_student' student.id %}" class="btn btn-info">Edit</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <a class="btn btn-primary" href="{% url 'course:create_student' %}">New student</a>
+  </div>
+
+{% endblock %}

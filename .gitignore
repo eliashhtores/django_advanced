@@ -10,4 +10,4 @@ db.sqlite3
 /static
 /media
 /.idea
-/product_hunt/static
+/advanced_django/static

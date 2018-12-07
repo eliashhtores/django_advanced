@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+  <div class="container">
+
+    <form class="form-horizontal" method="POST">
+      {% csrf_token %}
+
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+
+      <div class="form-group">
+        <label for="{{ form.first_name.id_for_label }}" class="col-sm-2 control-label">
+        {{ form.first_name.label }}</label>
+        <div class="col-sm-8">
+          {{ form.first_name }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}" class="col-sm-2 control-label">
+        {{ form.last_name.label }}</label>
+        <div class="col-sm-8">
+          {{ form.last_name }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.subject_student.id_for_label }}" class="col-sm-2 control-label">
+          {{ form.subject_student.label }}</label>
+        <div class="col-sm-8">
+          {{ form.subject_student }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+          <input type="submit" name="submit" value="Submit" class="btn btn-primary pull-right">
+        </div>
+      </div>
+  </form>
+
+  </div>
+{% endblock %}
