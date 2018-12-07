@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block login %}
+    <br>
+    <div class="col-md-6">
+
+        <form method="POST">
+            <div class="cold-md-12">
+                {% csrf_token %}
+                {% for error in form.non_field_errors %}
+                    <p>{{ error | safe }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group col-sm-6">
+                <input type="text" name="username" class="form-control" placeholder="User">
+                {% if form.username.errors %}
+                    <label class="help-icon">
+                        <span class="glyphicon glyphicon-info-sign">{{ form.username.errors }}</span>
+                    </label>
+                {% endif %}
+            </div>
+
+            <div class="form-group col-sm-6">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                {% if form.password.errors %}
+                    <span class="help-block"></span>
+                {% endif %}
+            </div>
+
+            <div class="form-group col-sm-4 ">
+                <input type="text" name="login" class="btn btn-dark form-control" value="Login">
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}
+
+{% block main %}
+{% endblock %}

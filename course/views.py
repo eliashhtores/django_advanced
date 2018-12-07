@@ -3,7 +3,12 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from course.forms import StudentForm
 from course.models import Student
+# from
 
+
+# @login_required
+def home(request):
+    return render(request, 'home.html')
 
 def list_students(request):
     students = Student.objects.all()
