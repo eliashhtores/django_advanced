@@ -17,8 +17,8 @@
 
 <br>
 
-<div id="content_div" class="row pl-5 col-md-9">
-  <a id="seach-subjects" class="btn btn-primary" href="#">Search</a>
+<div id="content-div" class="row pl-5 col-md-9">
+  <a id="search-subjects" class="btn btn-primary" href="#">Search</a>
   <div class="col-md-4">
     <input id="student-name" type="text" class="form-control">
   </div>
@@ -32,7 +32,6 @@
     <th>Credits</th>
   </thead>
   <tbody id="subjects">
-
   </tbody>
 </table>
 
@@ -45,13 +44,12 @@
         $(document).ready(function () {
 
             $('#content-div').on('click', '#search-subjects', function () {
-                var name = $('#student-name').val();
+                var first_name = $('#student-name').val();
 
-                $.get('{% url "course:list_user_subjects" %}', {name: name}, function (data) {
-                    console.log(name)
+                $.get('{% url "course:list_user_subjects" %}', {first_name: first_name}, function (data) {
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                        html += "<tr><td>" + data[i].fields.name + "</td><td>" + data[i].fields.number_credits + "</td><tr>";
+                        html += "<tr><td>" + data[i].fields.name + "</td><td>" + data[i].fields.credits + "</td><tr>";
                     }
                     $('#subjects').html(html);
                 });

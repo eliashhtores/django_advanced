@@ -2,10 +2,14 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from course.forms import StudentForm
-from course.models import Student
+from .forms import StudentForm
+from .models import Student, Subject
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.utils.decorators import method_decorator
+from django.core import serializers
+from django.http import HttpResponse
+from rest_framework import viewsets
+from .serializers import SubjectSerializer
 
 
 @login_required
@@ -34,7 +38,6 @@ def home_student(request):
     return render(request, 'home_student.html')
 
 @login_required
-# @permission_required('course.is_teacher')
 def list_students(request):
     students = Student.objects.all()
     return render(request, 'list_students.html', {'students': students})
@@ -78,12 +81,16 @@ class StudentDelete(DeleteView):
 
 
 class ListSubjects(ListView):
-    template_name = 'home_teacher.html'
     model = Student
 
     def get(self, request, *args, **kwargs):
-        name = request.GET['name']
-        student = Student.objects.get(name=name)
+        first_name = request.GET['first_name']
+        student = Student.objects.get(first_name=first_name)
         subjects = student.subject_student.all()
         data = serializers.serialize('json', subjects, fields=('name, credits'))
         return HttpResponse(data, content_type='application/json')
+
+
+class SubjectViewSet(viewsets.ModelViewSet):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
